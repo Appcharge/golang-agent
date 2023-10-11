@@ -11,5 +11,5 @@ go run cmd/main.go
 ### How to build docker image
 docker build -t appcharge/golang-template .
 
-How to run the container locally
+### How to run the container locally
 docker run -p 8000:8000 appcharge/golang-template
