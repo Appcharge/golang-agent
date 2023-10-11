@@ -6,6 +6,7 @@ import (
 	"github.com/joho/godotenv"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
+	"golang-agent/common/middleware"
 	_ "golang-agent/common/swagger"
 	"golang-agent/pkg/analytics"
 	"golang-agent/pkg/auth"
@@ -22,7 +23,7 @@ import (
 // @BasePath /mocker
 func main() {
 	router := gin.Default()
-	//router.Use(middleware.AuthenticationMiddleware())
+	router.Use(middleware.AuthenticationMiddleware())
 	mockerGroup := router.Group("/mocker")
 	// GET controllers
 	mockerGroup.GET("/health", health.CheckHealth)
