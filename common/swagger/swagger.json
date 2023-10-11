@@ -1,0 +1,724 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "A Mocker service API in Go using Gin framework.",
+        "title": "Golang Template API",
+        "contact": {}
+    },
+    "host": "localhost:8000",
+    "basePath": "/mocker",
+    "paths": {
+        "/analytics": {
+            "post": {
+                "description": "Retrieve analytics data from Appcharge API's.",
+                "summary": "Get Analytics Data.",
+                "parameters": [
+                    {
+                        "description": "Player Info Sync Request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/config.GetAnalyticsRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/config.GetAnalyticsResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/auth": {
+            "post": {
+                "description": "Authenticates user using Facebook, Google, AppleId, Token or Password.",
+                "summary": "Authenticate user.",
+                "parameters": [
+                    {
+                        "description": "Authentication Request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/config.AuthenticationRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/getOrders": {
+            "post": {
+                "description": "Get's orders from Appcharge internal API.",
+                "summary": "Get orders.",
+                "parameters": [
+                    {
+                        "description": "Orders Request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/config.GetOrdersRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/config.GetOrdersResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/health": {
+            "get": {
+                "description": "Shows status of an API",
+                "summary": "Get API health status.",
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/offer": {
+            "post": {
+                "description": "Create's offer in Appcharge systems.",
+                "summary": "Create offer.",
+                "parameters": [
+                    {
+                        "description": "Player Info Sync Request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/config.CreateOfferRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/config.OfferResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/playerInfoSync": {
+            "post": {
+                "description": "Sync's all info about player from the DB.",
+                "summary": "Sync Player Info.",
+                "parameters": [
+                    {
+                        "description": "Player Info Sync Request",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/config.PlayerInfoSyncRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/config.PlayerData"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/playerUpdateBalance": {
+            "post": {
+                "description": "Update balance for given player.",
+                "summary": "Update Player Balance.",
+                "parameters": [
+                    {
+                        "description": "Player Update Balance",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/config.PlayerUpdateBalanceRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/config.PlayerUpdateBalanceResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "config.AuthenticationRequest": {
+            "type": "object",
+            "required": [
+                "appId",
+                "authMethod",
+                "date"
+            ],
+            "properties": {
+                "appId": {
+                    "type": "string"
+                },
+                "authMethod": {
+                    "type": "string"
+                },
+                "date": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "token": {
+                    "type": "string"
+                },
+                "userName": {
+                    "type": "string"
+                }
+            }
+        },
+        "config.CreateOfferRequest": {
+            "type": "object",
+            "properties": {
+                "active": {
+                    "type": "boolean"
+                },
+                "createdBy": {
+                    "type": "string"
+                },
+                "intervals": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/config.Interval"
+                    }
+                },
+                "name": {
+                    "type": "string"
+                },
+                "offerUiId": {
+                    "type": "string"
+                },
+                "productsSequence": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "index": {
+                                "type": "integer"
+                            },
+                            "playerAvailability": {
+                                "type": "integer"
+                            },
+                            "priceInUsdCents": {
+                                "type": "integer"
+                            },
+                            "products": {
+                                "type": "array",
+                                "items": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    }
+                },
+                "publisherOfferId": {
+                    "type": "string"
+                },
+                "segments": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "type": {
+                    "type": "string"
+                }
+            }
+        },
+        "config.GetAnalyticsRequest": {
+            "type": "object",
+            "properties": {
+                "endDate": {
+                    "type": "string"
+                },
+                "incomeType": {
+                    "type": "string"
+                },
+                "metrics": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "startDate": {
+                    "type": "string"
+                }
+            }
+        },
+        "config.GetAnalyticsResponse": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "values": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/config.MetricValue"
+                    }
+                }
+            }
+        },
+        "config.GetOrdersRequest": {
+            "type": "object",
+            "required": [
+                "endDate",
+                "recordLimit",
+                "startDate",
+                "statuses"
+            ],
+            "properties": {
+                "endDate": {
+                    "type": "string"
+                },
+                "offset": {
+                    "type": "integer"
+                },
+                "recordLimit": {
+                    "type": "integer"
+                },
+                "startDate": {
+                    "type": "string"
+                },
+                "statuses": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "config.GetOrdersResponse": {
+            "type": "object",
+            "properties": {
+                "results": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/config.OrderItemResponse"
+                    }
+                },
+                "totalCount": {
+                    "type": "integer"
+                }
+            }
+        },
+        "config.Interval": {
+            "type": "object",
+            "properties": {
+                "endDate": {
+                    "type": "string"
+                },
+                "startDate": {
+                    "type": "string"
+                }
+            }
+        },
+        "config.MetricValue": {
+            "type": "object",
+            "properties": {
+                "date": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "number"
+                }
+            }
+        },
+        "config.OfferResponse": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "result": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                }
+            }
+        },
+        "config.OfferSnapshot": {
+            "type": "object",
+            "properties": {
+                "currencyCode": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "offerId": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "number"
+                },
+                "products": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/config.OfferSnapshotProduct"
+                    }
+                },
+                "publisherId": {
+                    "type": "string"
+                },
+                "sku": {
+                    "type": "string"
+                }
+            }
+        },
+        "config.OfferSnapshotProduct": {
+            "type": "object",
+            "properties": {
+                "amount": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "sku": {
+                    "type": "string"
+                }
+            }
+        },
+        "config.OrderItemResponse": {
+            "type": "object",
+            "properties": {
+                "_id": {
+                    "type": "string"
+                },
+                "amountTotal": {
+                    "type": "number"
+                },
+                "bundleName": {
+                    "type": "string"
+                },
+                "clientGaId": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "currency": {
+                    "type": "string"
+                },
+                "currencySymbol": {
+                    "type": "string"
+                },
+                "modifiedAt": {
+                    "type": "string"
+                },
+                "offerSnapshot": {
+                    "$ref": "#/definitions/config.OfferSnapshot"
+                },
+                "offersetId": {
+                    "type": "string"
+                },
+                "paymentId": {
+                    "type": "string"
+                },
+                "paymentUrl": {
+                    "type": "string"
+                },
+                "playerId": {
+                    "type": "string"
+                },
+                "provider": {
+                    "type": "string"
+                },
+                "publisherErrorMessage": {
+                    "type": "string"
+                },
+                "publisherId": {
+                    "type": "string"
+                },
+                "publisherPurchaseId": {
+                    "type": "string"
+                },
+                "reason": {
+                    "type": "string"
+                },
+                "retry": {
+                    "type": "integer"
+                },
+                "state": {
+                    "type": "string"
+                },
+                "utmCampaign": {
+                    "type": "string"
+                },
+                "utmMedium": {
+                    "type": "string"
+                },
+                "utmSource": {
+                    "type": "string"
+                }
+            }
+        },
+        "config.PlayerData": {
+            "type": "object",
+            "properties": {
+                "balances": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "balance": {
+                                "type": "integer"
+                            },
+                            "publisherProductId": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "focus": {
+                    "type": "object",
+                    "properties": {
+                        "publisherBundleId": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "offers": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "offerPlayerAvailability": {
+                                "type": "integer"
+                            },
+                            "productsSequence": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "index": {
+                                            "type": "integer"
+                                        },
+                                        "products": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "badgeText": {
+                                                        "type": "string"
+                                                    },
+                                                    "publisherProductId": {
+                                                        "type": "string"
+                                                    },
+                                                    "quantity": {
+                                                        "type": "integer"
+                                                    },
+                                                    "rarityProductInfo": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "rarityText": {
+                                                                "type": "string"
+                                                            },
+                                                            "stars": {
+                                                                "type": "integer"
+                                                            },
+                                                            "tooltipText": {
+                                                                "type": "string"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "publisherOfferId": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "playerName": {
+                    "type": "string"
+                },
+                "playerProfileImage": {
+                    "type": "string"
+                },
+                "publisherPlayerId": {
+                    "type": "string"
+                },
+                "segments": {
+                    "type": "array",
+                    "items": {}
+                },
+                "status": {
+                    "type": "string"
+                }
+            }
+        },
+        "config.PlayerInfoSyncRequest": {
+            "type": "object",
+            "properties": {
+                "playerId": {
+                    "type": "string"
+                }
+            }
+        },
+        "config.PlayerUpdateBalanceRequest": {
+            "type": "object",
+            "properties": {
+                "action": {
+                    "type": "string"
+                },
+                "actionStatus": {
+                    "type": "string"
+                },
+                "appChargePaymentId": {
+                    "type": "string"
+                },
+                "bundleId": {
+                    "type": "string"
+                },
+                "bundleName": {
+                    "type": "string"
+                },
+                "currency": {
+                    "type": "string"
+                },
+                "gameId": {
+                    "type": "string"
+                },
+                "originalPriceInDollar": {
+                    "type": "integer"
+                },
+                "playerId": {
+                    "type": "string"
+                },
+                "priceInCents": {
+                    "type": "integer"
+                },
+                "priceInDollar": {
+                    "type": "number"
+                },
+                "products": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/config.Product"
+                    }
+                },
+                "purchaseDateAndTimeUtc": {
+                    "type": "string"
+                },
+                "sku": {
+                    "type": "string"
+                },
+                "subTotal": {
+                    "type": "number"
+                },
+                "tax": {
+                    "type": "number"
+                }
+            }
+        },
+        "config.PlayerUpdateBalanceResponse": {
+            "type": "object",
+            "properties": {
+                "publisherPurchaseId": {
+                    "type": "string"
+                },
+                "purchaseTime": {
+                    "type": "string"
+                }
+            }
+        },
+        "config.Product": {
+            "type": "object",
+            "properties": {
+                "amount": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "sku": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

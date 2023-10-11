@@ -1,0 +1,82 @@
+{
+  "player": {
+    "status": "valid",
+    "playerProfileImage": "https:///fb.com/fdsfd",
+    "publisherPlayerId": "1234a",
+    "playerName": "player1",
+    "offers": [
+      {
+        "publisherOfferId": "prom_1",
+        "productsSequence": [
+          {
+            "index": 1,
+            "products": [
+              {
+                "publisherProductId": "111",
+                "quantity": 72720000
+              },
+              {
+                "publisherProductId": "Product_1",
+                "quantity": 2000000
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "publisherOfferId": "bundle_1",
+        "offerPlayerAvailability": 5,
+        "productsSequence": [
+          {
+            "index": 1,
+            "products": [
+              {
+                "publisherProductId": "Product_3",
+                "quantity": 875000000,
+                "rarityProductInfo": {
+                  "stars": 3,
+                  "tooltipText": "test 1",
+                  "rarityText": "test rarity"
+                }
+              },
+              {
+                "publisherProductId": "66754",
+                "quantity": 2,
+                "badgeText": "X2",
+                "rarityProductInfo": {
+                  "stars": 4,
+                  "tooltipText": "smt",
+                  "rarityText": "here rarity minutes"
+                }
+              },
+              {
+                "publisherProductId": "test111",
+                "quantity": 5,
+                "badgeText": "X8",
+                "rarityProductInfo": {
+                  "stars": 3,
+                  "tooltipText": "tooltip text",
+                  "rarityText": "very rare text"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "balances": [
+      {
+        "publisherProductId": "111",
+        "balance": 15
+      },
+      {
+        "publisherProductId": "kkk",
+        "balance": 13
+      }
+    ],
+    "segments": [],
+    "focus": {
+      "publisherBundleId": null
+    }
+  }
+}

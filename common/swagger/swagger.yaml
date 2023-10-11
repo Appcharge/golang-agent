@@ -1,0 +1,472 @@
+basePath: /mocker
+definitions:
+  config.AuthenticationRequest:
+    properties:
+      appId:
+        type: string
+      authMethod:
+        type: string
+      date:
+        type: string
+      password:
+        type: string
+      token:
+        type: string
+      userName:
+        type: string
+    required:
+    - appId
+    - authMethod
+    - date
+    type: object
+  config.CreateOfferRequest:
+    properties:
+      active:
+        type: boolean
+      createdBy:
+        type: string
+      intervals:
+        items:
+          $ref: '#/definitions/config.Interval'
+        type: array
+      name:
+        type: string
+      offerUiId:
+        type: string
+      productsSequence:
+        items:
+          properties:
+            index:
+              type: integer
+            playerAvailability:
+              type: integer
+            priceInUsdCents:
+              type: integer
+            products:
+              items:
+                type: integer
+              type: array
+          type: object
+        type: array
+      publisherOfferId:
+        type: string
+      segments:
+        items:
+          type: string
+        type: array
+      type:
+        type: string
+    type: object
+  config.GetAnalyticsRequest:
+    properties:
+      endDate:
+        type: string
+      incomeType:
+        type: string
+      metrics:
+        items:
+          type: string
+        type: array
+      startDate:
+        type: string
+    type: object
+  config.GetAnalyticsResponse:
+    properties:
+      name:
+        type: string
+      type:
+        type: string
+      values:
+        items:
+          $ref: '#/definitions/config.MetricValue'
+        type: array
+    type: object
+  config.GetOrdersRequest:
+    properties:
+      endDate:
+        type: string
+      offset:
+        type: integer
+      recordLimit:
+        type: integer
+      startDate:
+        type: string
+      statuses:
+        items:
+          type: string
+        type: array
+    required:
+    - endDate
+    - recordLimit
+    - startDate
+    - statuses
+    type: object
+  config.GetOrdersResponse:
+    properties:
+      results:
+        items:
+          $ref: '#/definitions/config.OrderItemResponse'
+        type: array
+      totalCount:
+        type: integer
+    type: object
+  config.Interval:
+    properties:
+      endDate:
+        type: string
+      startDate:
+        type: string
+    type: object
+  config.MetricValue:
+    properties:
+      date:
+        type: string
+      value:
+        type: number
+    type: object
+  config.OfferResponse:
+    properties:
+      message:
+        type: string
+      result:
+        type: string
+      status:
+        type: string
+    type: object
+  config.OfferSnapshot:
+    properties:
+      currencyCode:
+        type: string
+      description:
+        type: string
+      name:
+        type: string
+      offerId:
+        type: string
+      price:
+        type: number
+      products:
+        items:
+          $ref: '#/definitions/config.OfferSnapshotProduct'
+        type: array
+      publisherId:
+        type: string
+      sku:
+        type: string
+    type: object
+  config.OfferSnapshotProduct:
+    properties:
+      amount:
+        type: integer
+      name:
+        type: string
+      sku:
+        type: string
+    type: object
+  config.OrderItemResponse:
+    properties:
+      _id:
+        type: string
+      amountTotal:
+        type: number
+      bundleName:
+        type: string
+      clientGaId:
+        type: string
+      createdAt:
+        type: string
+      currency:
+        type: string
+      currencySymbol:
+        type: string
+      modifiedAt:
+        type: string
+      offerSnapshot:
+        $ref: '#/definitions/config.OfferSnapshot'
+      offersetId:
+        type: string
+      paymentId:
+        type: string
+      paymentUrl:
+        type: string
+      playerId:
+        type: string
+      provider:
+        type: string
+      publisherErrorMessage:
+        type: string
+      publisherId:
+        type: string
+      publisherPurchaseId:
+        type: string
+      reason:
+        type: string
+      retry:
+        type: integer
+      state:
+        type: string
+      utmCampaign:
+        type: string
+      utmMedium:
+        type: string
+      utmSource:
+        type: string
+    type: object
+  config.PlayerData:
+    properties:
+      balances:
+        items:
+          properties:
+            balance:
+              type: integer
+            publisherProductId:
+              type: string
+          type: object
+        type: array
+      focus:
+        properties:
+          publisherBundleId:
+            type: string
+        type: object
+      offers:
+        items:
+          properties:
+            offerPlayerAvailability:
+              type: integer
+            productsSequence:
+              items:
+                properties:
+                  index:
+                    type: integer
+                  products:
+                    items:
+                      properties:
+                        badgeText:
+                          type: string
+                        publisherProductId:
+                          type: string
+                        quantity:
+                          type: integer
+                        rarityProductInfo:
+                          properties:
+                            rarityText:
+                              type: string
+                            stars:
+                              type: integer
+                            tooltipText:
+                              type: string
+                          type: object
+                      type: object
+                    type: array
+                type: object
+              type: array
+            publisherOfferId:
+              type: string
+          type: object
+        type: array
+      playerName:
+        type: string
+      playerProfileImage:
+        type: string
+      publisherPlayerId:
+        type: string
+      segments:
+        items: {}
+        type: array
+      status:
+        type: string
+    type: object
+  config.PlayerInfoSyncRequest:
+    properties:
+      playerId:
+        type: string
+    type: object
+  config.PlayerUpdateBalanceRequest:
+    properties:
+      action:
+        type: string
+      actionStatus:
+        type: string
+      appChargePaymentId:
+        type: string
+      bundleId:
+        type: string
+      bundleName:
+        type: string
+      currency:
+        type: string
+      gameId:
+        type: string
+      originalPriceInDollar:
+        type: integer
+      playerId:
+        type: string
+      priceInCents:
+        type: integer
+      priceInDollar:
+        type: number
+      products:
+        items:
+          $ref: '#/definitions/config.Product'
+        type: array
+      purchaseDateAndTimeUtc:
+        type: string
+      sku:
+        type: string
+      subTotal:
+        type: number
+      tax:
+        type: number
+    type: object
+  config.PlayerUpdateBalanceResponse:
+    properties:
+      publisherPurchaseId:
+        type: string
+      purchaseTime:
+        type: string
+    type: object
+  config.Product:
+    properties:
+      amount:
+        type: integer
+      name:
+        type: string
+      sku:
+        type: string
+    type: object
+host: localhost:8000
+info:
+  contact: {}
+  description: A Mocker service API in Go using Gin framework.
+  title: Golang Template API
+paths:
+  /analytics:
+    post:
+      description: Retrieve analytics data from Appcharge API's.
+      parameters:
+      - description: Player Info Sync Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/config.GetAnalyticsRequest'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/config.GetAnalyticsResponse'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+      summary: Get Analytics Data.
+  /auth:
+    post:
+      description: Authenticates user using Facebook, Google, AppleId, Token or Password.
+      parameters:
+      - description: Authentication Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/config.AuthenticationRequest'
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+      summary: Authenticate user.
+  /getOrders:
+    post:
+      description: Get's orders from Appcharge internal API.
+      parameters:
+      - description: Orders Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/config.GetOrdersRequest'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/config.GetOrdersResponse'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+      summary: Get orders.
+  /health:
+    get:
+      description: Shows status of an API
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: Get API health status.
+  /offer:
+    post:
+      description: Create's offer in Appcharge systems.
+      parameters:
+      - description: Player Info Sync Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/config.CreateOfferRequest'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/config.OfferResponse'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+      summary: Create offer.
+  /playerInfoSync:
+    post:
+      description: Sync's all info about player from the DB.
+      parameters:
+      - description: Player Info Sync Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/config.PlayerInfoSyncRequest'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/config.PlayerData'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+      summary: Sync Player Info.
+  /playerUpdateBalance:
+    post:
+      description: Update balance for given player.
+      parameters:
+      - description: Player Update Balance
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/config.PlayerUpdateBalanceRequest'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/config.PlayerUpdateBalanceResponse'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+      summary: Update Player Balance.
+swagger: "2.0"

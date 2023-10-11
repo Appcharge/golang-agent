@@ -1,0 +1,54 @@
+{
+  "create": {
+    "publisherOfferId": "Offer_Bundle_3",
+    "name": "TEST",
+    "type": "SpecialOffer",
+    "intervals": [
+      {
+        "startDate": "2023-02-15T15:38:04.095Z",
+        "endDate": "2023-10-19T15:38:04.095Z"
+      }
+    ],
+    "offerUiId": "649ac34269796c8d41f3a11a",
+    "active": true,
+    "segments": [
+      "Segment_4"
+    ],
+    "productsSequence": [
+      {
+        "index": 1,
+        "products": [
+          {
+            "publisherProductId": "product123",
+            "productId": "649ac43369796c8d41f3a40d",
+            "quantity": 5
+          }
+        ],
+        "priceInUsdCents": 1999,
+        "playerAvailability": 100
+      }
+    ],
+    "createdBy": "API",
+    "dynamicOfferUi": {
+      "badges": []
+    }
+  },
+  "update": {
+    "publisherOfferId": "bundle_1",
+    "name": "BEST BUNDLE OFFER EVER",
+    "type": "Bundle",
+    "intervals": [
+      {
+        "startDate": "2023-07-14T11:10:37.763+00:00",
+        "endDate": "2023-10-14T11:10:37.763+00:00"
+      }
+    ],
+    "offerUiId": "649ac2e469796c8d41f39f00",
+    "active": true,
+    "segments": [
+      "Segment_1"
+    ],
+    "productsSequence": [],
+    "createdBy": "API"
+  }
+}
